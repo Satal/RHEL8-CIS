@@ -148,6 +148,8 @@
       - patch
       - rule_2.2.8
 
+# Perhaps we should look to break this out into each of the items separately
+# this would allow for any one of the servers while still disabling all others
 - name: "SCORED | 2.2.9 | PATCH | Ensure HTTP servers are not enabled"
   service:
       name: "{{item}}"
