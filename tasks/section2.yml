@@ -148,11 +148,17 @@
       - patch
       - rule_2.2.8
 
-- name: "SCORED | 2.2.9 | PATCH | Ensure HTTP server is not enabled"
+- name: "SCORED | 2.2.9 | PATCH | Ensure HTTP servers are not enabled"
   service:
-      name: httpd
+      name: "{{item}}"
       state: stopped
       enabled: no
+  with_items:
+    - httpd
+    - nginx
+    - apache
+    - apache2
+    - lighttpd    
   when:
       - not rhel8cis_httpd_server
       - httpd_service_status.stdout == "loaded"
