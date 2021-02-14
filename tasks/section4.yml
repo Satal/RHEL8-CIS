@@ -420,8 +420,8 @@
                 - "{{ rhel_08_4_2_1_4_audit.stdout_lines }}"
 
       - name: "NOTSCORED | 4.2.1.4 | PATCH | Ensure logging is configured | mail.* log setting"
-        lineinfile:
-            path: /etc/rsyslog.conf
+        blockinfile:
+            dest: /etc/rsyslog.conf
             state: present
             regexp: '^mail\.\*(.*)$'
             marker: "# {mark} MAIL LOG SETTINGS (ANSIBLE MANAGED)"
