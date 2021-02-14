@@ -421,7 +421,7 @@
 
       - name: "NOTSCORED | 4.2.1.4 | PATCH | Ensure logging is configured | mail.* log setting"
         blockinfile:
-            dest: /etc/rsyslog.conf
+            path: /etc/rsyslog.conf
             state: present
             regexp: '^mail\.\*(.*)$'
             marker: "# {mark} MAIL LOG SETTINGS (ANSIBLE MANAGED)"
