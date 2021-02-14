@@ -437,7 +437,7 @@
             - rhel8cis_rsyslog_ansibleManaged
 
       - name: "NOTSCORED | 4.2.1.4 | PATCH | Ensure logging is configured | news.crit log setting"
-        lineinfile:
+        blockinfile:
             path: /etc/rsyslog.conf
             state: present
             regexp: '^news\.\crit(.*)$'
