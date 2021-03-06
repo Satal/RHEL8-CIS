@@ -4,7 +4,11 @@
     url: https://192.168.179.167/centos
     dest: /home/admin/index.html
 
-# - name: Compilation Changed
-#   debug:
-#     msg: "File Compare"
-#   failed_when:  mf2sha1 != mf1sha1
+- name: Read html
+  shell: cat /home/admin/index.html
+  register: html
+
+- name: Check if file still working
+  debug:
+    msg: "File Compare"
+  failed_when: html.stdout.find("<head><title>Index of /centos/</title></head>") != -1
