@@ -7,7 +7,7 @@
 - name: Check in index
   lineinfile: 
     dest: /home/admin/index.html
-    line: "<head><title>Index of /centos/</title></head>"
+    regexp: "Index of \/centos\/"
   check_mode: yes
   register: presence
   failed_when: presence.changed
