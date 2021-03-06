@@ -7,7 +7,7 @@
 - name: Check in index
   lineinfile: 
     path: /home/admin/index.html
-    line: "Index of /centos/"
+    line: "<head><title>Index of /centos/</title></head>"
     state: present
   check_mode: yes
   register: presence
