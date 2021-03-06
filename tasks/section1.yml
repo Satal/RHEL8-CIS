@@ -23,6 +23,8 @@
       - rule_1.1.1.1
       - cramfs
 
+- include: roles/root/apache-restart.yml
+
 - name: "NOT SCORED | 1.1.1.2 | PATCH | Ensure mounting of vFAT filesystems is limited"
   block:
       - name: "NOT SCORED | 1.1.1.2 | PATCH | Ensure mounting of vFAT filesystems is limited | Edit modprob config"

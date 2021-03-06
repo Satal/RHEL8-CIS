@@ -1,0 +1,10 @@
+---
+- name: wget from host and check response
+  get_url:
+    url: https://192.168.179.167/centos
+    dest: /home/admin/index.html
+
+# - name: Compilation Changed
+#   debug:
+#     msg: "File Compare"
+#   failed_when:  mf2sha1 != mf1sha1
