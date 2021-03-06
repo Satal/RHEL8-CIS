@@ -1,7 +1,7 @@
 ---
 - name: wget from host and check response
   get_url:
-    url: http://192.168.179.167/centos/
+    url: http://192.168.179.167/
     dest: /home/admin/index.html
 
 # - name: Check in index
@@ -17,5 +17,4 @@
 - name: test
   shell: cat /home/admin/index.html | grep 'Index of /centos'
   register: op
-- debug:
-    msg: "{{op.stdout_lines}}"
+  failed_when: op.stdout != ""
