@@ -8,7 +8,7 @@
             line: "install cramfs /bin/true"
             create: yes
 
-      - include: tasks/live_checks.yml
+      - include: "{{live_checks_file}}"
 
       - name: "SCORED | 1.1.1.1 | PATCH | Remove cramfs module | Disable cramfs"
         modprobe:
@@ -17,7 +17,7 @@
         when:
             - ansible_connection != 'docker'
 
-      - include: tasks/live_checks.yml
+      - include: "{{live_checks_file}}"
   when:
       - rhel8cis_rule_1_1_1_1
   tags:
