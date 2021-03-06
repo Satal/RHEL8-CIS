@@ -61,6 +61,9 @@
       - patch
       - rule_2.2.2
 
+- name: Populate service facts
+  service_facts:
+
 - name: "SCORED | 2.2.3 | PATCH | Ensure rsync service is not enabled "
   service:
       name: rsyncd
@@ -267,10 +270,18 @@
       - rule_2.2.15
 
 - name: "SCORED | 2.2.16 | PATCH | Ensure CUPS is not enabled"
-  service:
-      name: cups
-      state: stopped
-      enabled: no
+  block:
+    - name: SCORED | 2.2.16 | 2.2.16 | PATCH | Ensure CUPS is not running 
+      service:
+        name: cups
+        state: stopped
+    
+    - name: SCORED | 2.2.16 | 2.2.16 | PATCH | Ensure CUPS disabled
+      service: 
+        name: cups
+        enabled: no
+      when: "'cups' in services"
+
   when:
       - not rhel8cis_cups_server
       - cups_service_status.stdout == "loaded"
