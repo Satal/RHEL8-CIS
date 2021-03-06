@@ -21,4 +21,4 @@
 
 - debug:
     msg: "{{op.stdout}}\n\n{{op.stdout_lines}}"
-  failed_when: op.stdout|length = 0
+  failed_when: op.stdout_lines | length == 0
