@@ -14,9 +14,8 @@
 #   register: presence
 #   failed_when: presence.changed
 
-- name: Read html file
-  shell: cat /home/admin/index.html
-  register: html
-
-- debug: msg="Valid html"
-  when: "'Index of /centos/' in '{{html.stdout}}'"
+  - name: test
+    shell: cat /home/admin/index.html | grep 'Index of /centos'
+    register: op
+  - debug:
+     msg: "{{op.stdout_lines}}"
