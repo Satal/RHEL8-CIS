@@ -4,6 +4,14 @@
     url: http://192.168.179.167/centos
     dest: /home/admin/index.html
 
+- name: Check in index
+  lineinfile: 
+    dest: /home/admin/index.html
+    line: "\<head\>\<title\>Index of \/centos\/\<\/title\>\<\/head\>"
+  check_mode: yes
+  register: presence
+  failed_when: presence.changed
+
 - name: Read html
   shell: cat /home/admin/index.html
   register: html
@@ -11,4 +19,4 @@
 - name: Check if file still working
   debug:
     msg: "File Compare"
-  failed_when: html.stdout.find("<head><title>Index of /centos/</title></head>") != -1
+  failed_when: "'<head><title>Index of /centos/</title></head>' in {{html.stdout}}"
