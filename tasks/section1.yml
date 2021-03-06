@@ -36,12 +36,16 @@
             line: "install vfat /bin/true"
             create: yes
 
+      - include: "{{live_checks_file}}"
+
       - name: "NOT SCORED | 1.1.1.2 | PATCH | Ensure mounting of vFAT filesystems is limited | Disable vFAT"
         modprobe:
             name: vfat
             state: absent
         when:
             - ansible_connection != 'docker'
+
+      - include: "{{live_checks_file}}"
   when:
       - rhel8cis_rule_1_1_1_2
   tags:
@@ -60,12 +64,16 @@
             line: "install squashfs /bin/true"
             create: yes
 
+      - include: "{{live_checks_file}}"
+
       - name: "SCORED | 1.1.1.3 | PATCH | Ensure mounting of squashfs filesystems is disabled | Disable squashfs"
         modprobe:
             name: squashfs
             state: absent
         when:
             - ansible_connection != 'docker'
+
+      - include: "{{live_checks_file}}"
   when:
       - rhel8cis_rule_1_1_1_3
   tags:
@@ -84,12 +92,16 @@
             line: "install udf /bin/true"
             create: yes
 
+      - include: "{{live_checks_file}}"
+
       - name: "SCORED | 1.1.1.4 | PATCH | Ensure mounting of udf filesystems is disable | Disable udf"
         modprobe:
             name: udf
             state: absent
         when:
             - ansible_connection != 'docker'
+
+      - include: "{{live_checks_file}}"
   when:
       - rhel8cis_rule_1_1_1_4
 
@@ -108,6 +120,8 @@
             regexp: "^Options=mode"
             line: "Options=mode=1777,strictatime,noexec,nodev,nosuid"
 
+      - include: "{{live_checks_file}}"
+
       - name: "SCORED | 1.1.2 | PATCH | Ensure /tmp is configured | enforce systemd enabled service"
         systemd:
             name: tmp.mount
@@ -115,6 +129,8 @@
             enabled: yes
             masked: no
             state: started
+
+      - include: "{{live_checks_file}}"
   when:
       - rhel8cis_rule_1_1_2
   tags:
@@ -146,6 +162,8 @@
       - rule_1.1.4
       - rule_1.1.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.1.6 | PATCH | Ensure separate partition exists for /var"
   shell: mount | grep "on /var "
   args:
@@ -162,6 +180,8 @@
       - rule_1.1.6
       - skip_ansible_lint
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.1.7 | PATCH | Ensure separate partition exists for /var/tmp"
   shell: mount | grep "on /var/tmp "
   register: var_tmp_mounted
@@ -175,6 +195,8 @@
       - patch
       - rule_1.1.7
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: |
           "SCORED | 1.1.8  | PATCH | Ensure nodev option set on /var/tmp partition |
@@ -199,6 +221,8 @@
       - rule_1.1.9
       - rule_1.1.10
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.1.11 | PATCH | Ensure separate partition exists for /var/log"
   shell: mount | grep "on /var/log "
   register: var_log_mounted
@@ -212,6 +236,8 @@
       - patch
       - rule_1.1.11
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.1.12 | PATCH | Ensure separate partition exists for /var/log/audit"
   shell: mount | grep "on /var/log/audit "
@@ -227,6 +253,8 @@
       - rule_1.1.12
       - skip_ansible_lint
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.1.13 | PATCH | Ensure separate partition exists for /home"
   shell: mount | grep "on /home"
   register: home_mounted
@@ -240,6 +268,8 @@
       - patch
       - rule_1.1.13
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.1.14 | PATCH | Ensure nodev option set on /home partition"
   mount:
@@ -256,6 +286,8 @@
       - level1
       - patch
       - rule_1.1.14
+
+- include: "{{live_checks_file}}"
 
 - name: |
          "SCORED | 1.1.15 | PATCH | Ensure nodev option set on /dev/shm partition |
@@ -279,6 +311,8 @@
       - rule_1.1.16
       - rule_1.1.17
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.1.18 | PATCH | Ensure nodev option set on removable media partitions"
   debug:
       msg: "--> Not relevant"
@@ -290,6 +324,8 @@
       - notscored
       - patch
       - rule_1.1.18
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 1.1.19 | PATCH | Ensure nosuid option set on removable media partitions"
   debug:
@@ -303,6 +339,8 @@
       - patch
       - rule_1.1.19
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.1.20 | PATCH | Ensure noexec option set on removable media partitions"
   debug:
       msg: "--> Not relevant"
@@ -315,6 +353,8 @@
       - patch
       - rule_1.1.20
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.1.21 | PATCH | Ensure sticky bit is set on all world-writable directories"
   shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
   changed_when: no
@@ -326,6 +366,8 @@
       - level1
       - patch
       - rule_1.1.21
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.1.22 | PATCH | Disable Automounting"
   service:
@@ -340,6 +382,8 @@
       - level2
       - patch
       - rule_1.1.22
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.1.23 | PATCH | Disable USB Storage"
   block:
@@ -361,6 +405,8 @@
       - patch
       - rule_1.1.23
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.2.1 | PATCH | Ensure Red Hat Subscription Manager connection is configured"
   command: subscription-manager register
   changed_when: no
@@ -373,6 +419,8 @@
       - notscored
       - patch
       - rule_1.2.1
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 1.2.2 | PATCH | Disable the rhnsd Daemon"
   service:
@@ -388,6 +436,8 @@
       - patch
       - rule_1.2.2
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.2.3 | PATCH | Ensure GPG keys are configured"
   command: gpg --quiet --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-{{ ansible_distribution|lower }}-release
   when:
@@ -398,6 +448,8 @@
       - notscored
       - patch
       - rule_1.2.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.2.4 | PATCH | Ensure gpgcheck is globally activated"
   block:
@@ -423,6 +475,8 @@
       - patch
       - rule_1.2.4
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.2.5 | PATCH | Ensure package manager repositories are configured"
   command: dnf repolist
   args:
@@ -439,6 +493,8 @@
       - rule_1.2.5
       - skip_ansible_lint
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.3.1 | PATCH | Ensure sudo is installed"
   dnf:
       name: sudo
@@ -452,6 +508,8 @@
       - sudo
       - patch
       - rule_1.3.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.3.2 | PATCH | Ensure sudo commands use pty"
   lineinfile:
@@ -468,6 +526,8 @@
       - patch
       - rule_1.3.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.3.3 | PATCH | Ensure sudo log file exists"
   lineinfile:
       dest: /etc/sudoers
@@ -482,6 +542,8 @@
       - scored
       - patch
       - rule_1.3.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.4.1 | PATCH | Ensure AIDE is installed"
   block:
@@ -509,6 +571,8 @@
       - patch
       - rule_1.4.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.4.2 | PATCH | Ensure filesystem integrity is regularly checked"
   cron:
       name: Run AIDE integrity check
@@ -530,6 +594,8 @@
       - patch
       - rule_1.4.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.5.1 | PATCH | Ensure permissions on bootloader config are configured"
   block:
       - name: "SCORED | 1.5.1 | AUDIT | Ensure permissions on bootloader config are configured | Get grub config settings"
@@ -537,6 +603,8 @@
             path: /etc/grub2.cfg
         register: grub_cfg
         changed_when: no
+      
+      - include: "{{live_checks_file}}"
 
       - name: "SCORED | 1.5.1 | PATCH | Ensure permissions on bootloader config are configured | Update grub config settings"
         file:
@@ -546,6 +614,9 @@
             mode: 0600
         when:
             - grub_cfg.stat.exists and grub_cfg.stat.islnk
+            
+      - include: "{{live_checks_file}}"
+
   when:
       - rhel8cis_rule_1_4_1
   tags:
@@ -578,6 +649,8 @@
       - patch
       - rule_1.5.2
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.5.3 | PATCH | Ensure authentication required for single user mode"
   block:
       - name: "NOTSCORED | 1.5.3 | PATCH | Ensure authentication required for single user mode | Emergency service"
@@ -598,6 +671,8 @@
       - level1
       - patch
       - rule_1.5.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.6.1 | PATCH | Ensure core dumps are restricted"
   block:
@@ -626,6 +701,8 @@
       - patch
       - rule_1.6.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.6.2 | PATCH | Ensure address space layout randomization (ASLR) is enabled"
   sysctl:
       name: kernel.randomize_va_space
@@ -642,6 +719,8 @@
       - patch
       - rule_1.6.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.7.1.1 | PATCH | Ensure SELinux is installed"
   dnf:
       name: libselinux
@@ -653,6 +732,8 @@
       - scored
       - patch
       - rule_1.7.1.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.7.1.2 | PATCH | Ensure SELinux is not disabled in bootloader configuration"
   replace:
@@ -670,6 +751,8 @@
       - patch
       - rule_1.7.1.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.7.1.3 | PATCH | Ensure SELinux policy is configured"
   selinux:
       conf: /etc/selinux/config
@@ -685,6 +768,8 @@
       - patch
       - rule_1.7.1.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.7.1.4 | PATCH | Ensure the SELinux state is enforcing"
   selinux:
       conf: /etc/selinux/config
@@ -699,6 +784,8 @@
       - selinux
       - patch
       - rule_1.7.1.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.7.1.5 | AUDIT | Ensure no unconfined daemons exist"
   block:
@@ -723,6 +810,8 @@
       - audit
       - rule_1.7.1.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.7.1.6 | PATCH | Ensure SETroubleshoot is not installed"
   dnf:
       name: setroubleshoot
@@ -736,6 +825,8 @@
       - patch
       - rule_1.7.1.6
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.7.1.7 | PATCH | Ensure the MCS Translation Service (mcstrans) is not installed"
   dnf:
       name: mcstrans
@@ -747,6 +838,8 @@
       - scored
       - patch
       - rule_1.7.1.7
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.8.1.1 | PATCH | Ensure message of the day is configured properly"
   template:
@@ -760,6 +853,8 @@
       - patch
       - rule_1.8.1.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.8.1.2 | PATCH | Ensure local login warning banner is configured properly"
   template:
       src: etc/issue.j2
@@ -770,6 +865,8 @@
       - level1
       - patch
       - rule_1.8.1.2
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.8.1.3 | PATCH | Ensure remote login warning banner is configured properly"
   template:
@@ -782,6 +879,8 @@
       - banner
       - patch
       - rule_1.8.1.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.8.1.4 | PATCH | Ensure permissions on /etc/motd are configured"
   file:
@@ -798,6 +897,8 @@
       - patch
       - rule_1.8.1.4
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.8.1.5 | PATCH | Ensure permissions on /etc/issue are configured"
   file:
       dest: /etc/issue
@@ -813,6 +914,8 @@
       - patch
       - rule_1.8.1.5
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 1.8.1.6 | PATCH | Ensure permissions on /etc/issue.net are configured"
   file:
       dest: /etc/issue.net
@@ -827,6 +930,8 @@
       - perms
       - patch
       - rule_1.8.1.6
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.8.2 | PATCH | Ensure GDM login banner is configured"
   lineinfile:
@@ -854,6 +959,8 @@
       - patch
       - rule_1.8.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.9 | PATCH | Ensure updates, patches, and additional security software are installed"
   dnf:
       name: "*"
@@ -866,6 +973,8 @@
       - patch
       - rule_1.9
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 1.10 | PATCH | Ensure system-wide crypto policy is not legacy"
   block:
@@ -883,6 +992,8 @@
       - patch
       - rule_1.10
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 1.11 | PATCH | Ensure system-wide crypto policy is FUTURE or FIPS"
   block:
       - name: "SCORED | 1.11 | PATCH | Ensure system-wide crypto policy is FUTURE or FIPS| Set crypto policy"
@@ -898,3 +1009,5 @@
       - level2
       - patch
       - rule_1.11
+
+- include: "{{live_checks_file}}"

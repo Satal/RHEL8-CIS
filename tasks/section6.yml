@@ -1,4 +1,6 @@
 ---
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 6.1.1 | PATCH | Audit system file permissions"
   block:
       - name: "NOTSCORED | 6.1.1 | AUDIT | Audit system file permissions | Register package list"
@@ -35,6 +37,8 @@
       - patch
       - rule_6.1.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.2 | PATCH | Ensure permissions on /etc/passwd are configured"
   file:
       dest: /etc/passwd
@@ -47,6 +51,8 @@
       - level1
       - patch
       - rule_6.1.2
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.1.3 | PATCH | Ensure permissions on /etc/shadow are configured"
   file:
@@ -61,6 +67,8 @@
       - patch
       - rule_6.1.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.4 | PATCH | Ensure permissions on /etc/group are configured"
   file:
       dest: /etc/group
@@ -73,6 +81,8 @@
       - level1
       - patch
       - rule_6.1.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.1.5 | PATCH | Ensure permissions on /etc/gshadow are configured"
   file:
@@ -87,6 +97,8 @@
       - patch
       - rule_6.1.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.6 | PATCH | Ensure permissions on /etc/passwd- are configured"
   file:
       dest: /etc/passwd-
@@ -99,6 +111,8 @@
       - level1
       - patch
       - rule_6.1.6
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.1.7 | PATCH | Ensure permissions on /etc/shadow- are configured"
   file:
@@ -113,6 +127,8 @@
       - patch
       - rule_6.1.7
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.8 | PATCH | Ensure permissions on /etc/group- are configured"
   file:
       dest: /etc/group-
@@ -126,6 +142,8 @@
       - patch
       - rule_6.1.8
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.9 | PATCH | Ensure permissions on /etc/gshadow- are configured"
   file:
       dest: /etc/gshadow-
@@ -138,6 +156,8 @@
       - level1
       - patch
       - rule_6.1.9
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.1.10 | PATCH | Ensure no world writable files exist"
   block:
@@ -172,6 +192,8 @@
       - patch
       - rule_6.1.10
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.11 | PATCH | Ensure no unowned files or directories exist"
   block:
       - name: "SCORED | 6.1.11 | AUDIT | Ensure no unowned files or directories exist | Finding all unowned files or directories"
@@ -197,6 +219,8 @@
       - patch
       - rule_6.1.11
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.1.12 | PATCH | Ensure no ungrouped files or directories exist"
   block:
       - name: "SCORED | 6.1.12 | AUDIT | Ensure no ungrouped files or directories exist | Finding all ungrouped files or directories"
@@ -221,6 +245,8 @@
       - level1
       - patch
       - rule_6.1.12
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 6.1.13 | PATCH | Audit SUID executables"
   block:
@@ -253,6 +279,8 @@
       - patch
       - rule_6.1.13
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 6.1.14 | PATCH | Audit SGID executables"
   block:
       - name: "NOTSCORED | 6.1.14 | AUDIT | Audit SGID executables | Find all SGID executables"
@@ -284,6 +312,8 @@
       - patch
       - rule_6.1.14
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.1 | PATCH | Ensure password fields are not empty"
   command: passwd -l {{ item }}
   changed_when: no
@@ -297,6 +327,8 @@
       - patch
       - rule_6.2.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.2 | PATCH | Ensure no legacy '+' entries exist in /etc/passwd"
   command: sed -i '/^+/ d' /etc/passwd
   changed_when: no
@@ -308,6 +340,8 @@
       - patch
       - rule_6.2.2
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.3 | PATCH | Ensure root PATH Integrity"
   block:
@@ -354,6 +388,8 @@
       - patch
       - rule_6.2.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.4 | PATCH | Ensure no legacy '+' entries exist in /etc/shadow"
   command: sed -i '/^+/ d' /etc/shadow
   changed_when: no
@@ -365,6 +401,8 @@
       - patch
       - rule_6.2.4
       - skip_ansible_lint
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.5 | PATCH | Ensure no legacy '+' entries exist in /etc/group"
   command: sed -i '/^+/ d' /etc/group
@@ -378,6 +416,8 @@
       - rule_6.2.5
       - skip_ansible_lint
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.6 | PATCH | Ensure root is the only UID 0 account"
   command: passwd -l {{ item }}
   changed_when: no
@@ -390,6 +430,8 @@
       - level1
       - patch
       - rule_6.2.6
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.7 | PATCH | Ensure users' home directories permissions are 750 or more restrictive"
   block:
@@ -453,6 +495,8 @@
       - patch
       - rule_6.2.7
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.8 | PATCH | Ensure users own their home directories"
   file:
       path: "{{ item.dir }}"
@@ -468,6 +512,8 @@
       - level1
       - patch
       - rule_6.2.8
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.9 | PATCH | Ensure users' dot files are not group or world-writable"
   block:
@@ -501,6 +547,8 @@
       - patch
       - rule_6.2.9
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.10 | PATCH | Ensure no users have .forward files"
   file:
       state: absent
@@ -512,6 +560,8 @@
       - level1
       - patch
       - rule_6.2.10
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.11 | PATCH | Ensure no users have .netrc files"
   file:
@@ -525,6 +575,8 @@
       - patch
       - rule_6.2.11
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.12 | PATCH | Ensure users' .netrc Files are not group or world accessible"
   command: /bin/true
   changed_when: no
@@ -535,6 +587,8 @@
       - level1
       - patch
       - rule_6.2.12
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.13 | PATCH | Ensure no users have .rhosts files"
   file:
@@ -547,6 +601,8 @@
       - level1
       - patch
       - rule_6.2.13
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.14 | PATCH | Ensure all groups in /etc/passwd exist in /etc/group"
   block:
@@ -574,6 +630,8 @@
       - patch
       - rule_6.2.14
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.15 | PATCH | Ensure no duplicate UIDs exist"
   block:
       - name: "SCORED | 6.2.15 | AUDIT | Ensure no duplicate UIDs exist | Check for duplicate UIDs"
@@ -597,6 +655,8 @@
       - level1
       - patch
       - rule_6.2.15
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.16 | PATCH | Ensure no duplicate GIDs exist"
   block:
@@ -622,6 +682,8 @@
       - patch
       - rule_6.2.16
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.17 | PATCH | Ensure no duplicate user names exist"
   block:
       - name: "SCORED | 6.2.17 | AUDIT | Ensure no duplicate user names exist | Check for duplicate User Names"
@@ -646,6 +708,8 @@
       - patch
       - rule_6.2.17
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 6.2.18 | PATCH | Ensure no duplicate group names exist"
   block:
       - name: "SCORED | 6.2.18 | AUDIT | Ensure no duplicate group names exist | Check for duplicate group names"
@@ -669,6 +733,8 @@
       - level1
       - patch
       - rule_6.2.18
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.19 | PATCH | Ensure shadow group is empty"
   block:
@@ -721,6 +787,8 @@
       - level1
       - audit
       - rule_6.2.19
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 6.2.20 | PATCH | Ensure users home directories permissions are 750 or more restrictive"
   block:
@@ -783,3 +851,5 @@
       - level1
       - patch
       - rule_6.2.20
+
+- include: "{{live_checks_file}}"

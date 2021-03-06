@@ -1,23 +1,13 @@
 ---
 - name: wget from host and check response
   get_url:
-    url: http://192.168.179.167/
+    url: http://192.168.179.167/centos
     dest: /home/admin/index.html
 
-# - name: Check in index
-#   lineinfile: 
-#     path: /home/admin/index.html
-#     regexp: "^<head><title>Index of /centos/</title></head>"
-#     line: "<head><title>Index of /centos/</title></head>"
-#     state: present
-#   check_mode: yes
-#   register: presence
-#   failed_when: presence.changed
-
-- name: test
+- name: Get output for test
   shell: cat /home/admin/index.html | grep 'Index of /centos'
   register: op
 
 - debug:
-    msg: "{{op.stdout}}\n\n{{op.stdout_lines}}"
+    msg: "Test that server is still running"
   failed_when: op.stdout_lines | length == 0

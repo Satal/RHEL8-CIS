@@ -1,4 +1,6 @@
 ---
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.1.1 | PATCH | Ensure IP forwarding is disabled"
   block:
       - name: "SCORED | 3.1.1 | PATCH | Ensure IP forwarding is disabled | Disable IPv4 forwarding"
@@ -38,6 +40,8 @@
       - patch
       - rule_3.1.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.1.2 | PATCH | Ensure packet redirect sending is disabled"
   sysctl:
       name: '{{ item.name }}'
@@ -59,6 +63,8 @@
       - sysctl
       - patch
       - rule_3.1.2
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.2.1 | PATCH | Ensure source routed packets are not accepted"
   block:
@@ -105,6 +111,8 @@
       - patch
       - rule_3.2.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.2.2 | PATCH | Ensure ICMP redirects are not accepted"
   block:
       - name: "SCORED | 3.2.2 | PATCH | Ensure ICMP redirects are not accepted | Set ICMP redirects IPv4"
@@ -144,6 +152,8 @@
       - patch
       - rule_3.2.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.2.3 | PATCH | Ensure secure ICMP redirects are not accepted"
   sysctl:
       name: '{{ item.name }}'
@@ -164,6 +174,8 @@
       - sysctl
       - patch
       - rule_3.2.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.2.4 | PATCH | Ensure suspicious packets are logged"
   sysctl:
@@ -186,6 +198,8 @@
       - patch
       - rule_3.2.4
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.2.5 | PATCH | Ensure broadcast ICMP requests are ignored"
   sysctl:
       name: net.ipv4.icmp_echo_ignore_broadcasts
@@ -203,6 +217,8 @@
       - patch
       - rule_3.2.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.2.6 | PATCH | Ensure bogus ICMP responses are ignored"
   sysctl:
       name: net.ipv4.icmp_ignore_bogus_error_responses
@@ -219,6 +235,8 @@
       - sysctl
       - patch
       - rule_3.2.6
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.2.7 | PATCH | Ensure Reverse Path Filtering is enabled"
   sysctl:
@@ -238,6 +256,8 @@
       - patch
       - rule_3.2.7
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.2.8 | PATCH | Ensure TCP SYN Cookies is enabled"
   sysctl:
       name: net.ipv4.tcp_syncookies
@@ -254,6 +274,8 @@
       - sysctl
       - patch
       - rule_3.2.8
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.2.9 | PATCH | Ensure IPv6 router advertisements are not accepted"
   sysctl:
@@ -277,6 +299,8 @@
       - patch
       - rule_3.2.9
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.3.1 | PATCH | Ensure DCCP is disabled"
   lineinfile:
       dest: /etc/modprobe.d/CIS.conf
@@ -289,6 +313,8 @@
       - level2
       - patch
       - rule_3.3.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.3.2 | PATCH | Ensure SCTP is disabled"
   lineinfile:
@@ -303,6 +329,8 @@
       - patch
       - rule_3.3.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.3.3 | PATCH | Ensure RDS is disabled"
   lineinfile:
       dest: /etc/modprobe.d/CIS.conf
@@ -315,6 +343,8 @@
       - level2
       - patch
       - rule_3.3.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.1.1 | PATCH | Ensure a Firewall package is installed"
   dnf:
@@ -329,6 +359,8 @@
       - level1
       - patch
       - rule_3.4.1.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.2.1 | PATCH | Ensure firewalld service is enabled and running"
   service:
@@ -355,6 +387,8 @@
       - patch
       - rule_3_4_2_2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.2.3 | PATCH | Ensure nftables is not enabled"
   service:
       name: nftables
@@ -368,6 +402,8 @@
       - patch
       - rule_3_4_2_3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.2.4 | PATCH | Ensure default zone is set"
   command: firewall-cmd --set-default-zone="{{ rhel8cis_default_zone }}"
   when:
@@ -377,6 +413,8 @@
       - level1
       - patch
       - rule_3.4.2.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.2.5 | AUDIT | Ensure network interfaces are assigned to appropriate zone"
   block:
@@ -398,6 +436,8 @@
       - audit
       - rule_3.4.2.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.2.6 | AUDIT | Ensure unnecessary services and ports are not accepted"
   block:
       - name: "SCORED | 3.4.2.6 | AUDIT | Ensure unnecessary services and ports are not accepted | Get list of services and ports"
@@ -418,6 +458,8 @@
       - audit
       - rule_3.4.2.6
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 3.4.3.1 | PATCH | Ensure iptables are flushed"
   block:
       - name: "NOTSCORED | 3.4.3.1 | PATCH | Ensure iptables are flushed | Flush IPv4 tables"
@@ -436,6 +478,8 @@
       - level1
       - patch
       - rule_3.4.3.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.3.2 | PATCH | Ensure a table exists"
   block:
@@ -474,6 +518,8 @@
       - level1
       - patch
       - rule_3.4.3.2
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.3.3 | PATCH | Ensure base chains exist"
   block:
@@ -522,6 +568,8 @@
       - patch
       - rule_3.4.3.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.3.4 | PATCH | Ensure loopback traffic is configured"
   block:
       - name: "SCORED | 3.4.3.4 | AUDIT | Ensure loopback traffic is configured | Gather iif lo accept existence"
@@ -569,6 +617,8 @@
       - level1
       - patch
       - rule_3.4.3.4
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 3.4.3.5 | PATCH | Ensure outbound and established connections are configured"
   block:
@@ -628,6 +678,8 @@
       - level1
       - patch
       - rule_3.4.3.5
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.3.6 | PATCH | Ensure default deny firewall policy"
   block:
@@ -690,6 +742,8 @@
       - patch
       - rule_3.4.3.6
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.3.7 | PATCH | Ensure nftables service is enabled | Check if nftables is enabled"
   service:
       name: nftables
@@ -702,6 +756,8 @@
       - level1
       - patch
       - rule_3.4.3.7
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.3.8 | PATCH | Ensure nftables rules are permanent"
   lineinfile:
@@ -717,6 +773,8 @@
       - level1
       - patch
       - rule_3.4.3.8
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.4.1.1 | PATCH | Ensure default deny firewall policy"
   block:
@@ -742,6 +800,8 @@
       - level1
       - patch
       - rule_3.4.4.1.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.4.1.2 | PATCH | Ensure loopback traffic is configured"
   block:
@@ -773,6 +833,8 @@
       - patch
       - rule_3.4.4.1.2
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 3.4.4.1.3 | PATCH | Ensure outbound and established connections are configured"
   iptables:
       action: append
@@ -795,6 +857,8 @@
       - level1
       - patch
       - rule_3.4.4.1.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.4.1.4 | PATCH | Ensure firewall rules exist for all open ports"
   block:
@@ -843,6 +907,8 @@
       - patch
       - rule_3.4.4.1.4
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 3.4.4.2.1 | PATCH | Ensure IPv6 default deny firewall policy"
   block:
       - name: "SCORED | 3.4.4.2.1 | PATCH | Ensure IPv6 default deny firewall policy | Configure ssh to be allowed"
@@ -872,6 +938,8 @@
       - level1
       - patch
       - rule_3.4.4.2.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.4.4.2.2 | PATCH | Ensure IPv6 loopback traffic is configured"
   block:
@@ -910,6 +978,8 @@
       - patch
       - rule_3.4.4.2.2
 
+- include: "{{live_checks_file}}"
+
 - name: "NOTSCORED | 3.4.4.2.3 | PATCH | Ensure IPv6 outbound and established connections are configured"
   iptables:
       action: append
@@ -935,6 +1005,8 @@
       - level1
       - patch
       - rule_3.4.4.2.3
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 3.4.4.2.4 | PATCH | Ensure IPV6 firewall rules exist for all open ports"
   block:
@@ -966,6 +1038,8 @@
       - level1
       - patch
       - rule_3.4.4.2.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 3.5 | PATCH | Ensure wireless interfaces are disabled"
   block:
@@ -999,6 +1073,8 @@
       - level2
       - patch
       - rule_3.5
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 3.6 | PATCH | Disable IPv6"
   replace:

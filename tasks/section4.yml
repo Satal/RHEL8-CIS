@@ -1,4 +1,6 @@
 ---
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.1.1 | PATCH | Ensure auditd is installed"
   block:
       - name: "SCORED | 4.1.1.1 | PATCH | Ensure auditd is installed | Check for auditd packages"
@@ -30,6 +32,8 @@
       - patch
       - rule_4.1.1.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.1.2 | PATCH | Ensure auditd service is enabled"
   service:
       name: auditd
@@ -44,6 +48,8 @@
       - auditd
       - patch
       - rule_4.1.1.2
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.1.3 | PATCH | Ensure auditing for processes that start prior to auditd is enabled"
   replace:
@@ -61,6 +67,8 @@
       - patch
       - rule_4.1.1.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.1.4 | PATCH | Ensure audit_backlog_limit is sufficient"
   replace:
       dest: /etc/default/grub
@@ -75,6 +83,8 @@
       - level2
       - patch
       - rule_4.1.1.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.2.1 | PATCH | Ensure audit log storage size is configured"
   lineinfile:
@@ -91,6 +101,8 @@
       - patch
       - rule_4.1.2.1
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.2.2 | PATCH | Ensure audit logs are not automatically deleted"
   lineinfile:
       dest: /etc/audit/auditd.conf
@@ -106,6 +118,8 @@
       - patch
       - rule_4.1.2.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.2.3 | PATCH | Ensure system is disabled when audit logs are full"
   lineinfile:
       dest: /etc/audit/auditd.conf
@@ -120,6 +134,8 @@
       - auditd
       - patch
       - rule_4.1.2.3
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.3 | PATCH | Ensure changes to system administration scope (sudoers) is collected"
   template:
@@ -137,6 +153,8 @@
       - patch
       - rule_4.1.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.4 | PATCH | Ensure login and logout events are collected"
   template:
       src: audit/rhel8cis_rule_4_1_4.rules.j2
@@ -152,6 +170,8 @@
       - auditd
       - patch
       - rule_4.1.4
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.5 | PATCH | Ensure session initiation information is collected"
   template:
@@ -169,6 +189,8 @@
       - patch
       - rule_4.1.5
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.6 | PATCH | Ensure events that modify date and time information are collected"
   template:
       src: audit/rhel8cis_rule_4_1_6.rules.j2
@@ -184,6 +206,8 @@
       - auditd
       - patch
       - rule_4.1.6
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.7 | PATCH | Ensure events that modify the system's Mandatory Access Controls are collected"
   template:
@@ -201,6 +225,8 @@
       - patch
       - rule_4.1.7
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.8 | PATCH | Ensure events that modify the system's network environment are collected"
   template:
       src: audit/rhel8cis_rule_4_1_8.rules.j2
@@ -216,6 +242,8 @@
       - auditd
       - patch
       - rule_4.1.8
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.9 | PATCH | Ensure discretionary access control permission modification events are collected"
   template:
@@ -233,6 +261,8 @@
       - patch
       - rule_4.1.9
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.10 | PATCH | Ensure unsuccessful unauthorized file access attempts are collected"
   template:
       src: audit/rhel8cis_rule_4_1_10.rules.j2
@@ -249,6 +279,8 @@
       - patch
       - rule_4.1.10
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.11 | PATCH | Ensure events that modify user/group information are collected"
   template:
       src: audit/rhel8cis_rule_4_1_11.rules.j2
@@ -264,6 +296,8 @@
       - auditd
       - patch
       - rule_4.1.11
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.12 | PATCH | Ensure successful file system mounts are collected"
   block:
@@ -289,6 +323,8 @@
       - patch
       - rule_4.1.12
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.13 | PATCH | Ensure use of privileged commands is collected"
   template:
       src: audit/rhel8cis_rule_4_1_13.rules.j2
@@ -304,6 +340,8 @@
       - auditd
       - patch
       - rule_4.1.13
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.14 | PATCH | Ensure file deletion events by users are collected"
   template:
@@ -321,6 +359,8 @@
       - patch
       - rule_4.1.14
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.15 | PATCH | Ensure kernel module loading and unloading is collected"
   template:
       src: audit/rhel8cis_rule_4_1_15.rules.j2
@@ -336,6 +376,8 @@
       - auditd
       - patch
       - rule_4.1.15
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.1.16 | PATCH | Ensure system administrator actions (sudolog) are collected"
   template:
@@ -353,6 +395,8 @@
       - patch
       - rule_4.1.16
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.1.17 | PATCH | Ensure the audit configuration is immutable"
   template:
       src: audit/rhel8cis_rule_4_1_17.rules.j2
@@ -369,6 +413,8 @@
       - patch
       - rule_4.1.17
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.1.1 | PATCH | Ensure rsyslog or syslog-ng is installed"
   dnf:
       name: "{{ rhel8cis_syslog }}"
@@ -379,6 +425,8 @@
       - level1
       - patch
       - rule_4.2.1.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.2.1.2 | PATCH | Ensure rsyslog Service is enabled"
   service:
@@ -393,6 +441,8 @@
       - rsyslog
       - rule_4.2.1.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.1.3 | PATCH | Ensure rsyslog default file permissions configured"
   lineinfile:
       dest: /etc/rsyslog.conf
@@ -405,6 +455,8 @@
       - level1
       - patch
       - rule_4.2.1.3
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 4.2.1.4 | PATCH | Ensure logging is configured"
   block:
@@ -490,6 +542,8 @@
       - rsyslog
       - rule_4.2.1.4
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.1.5 | PATCH | Ensure rsyslog is configured to send logs to a remote log host"
   blockinfile:
       path: /etc/rsyslog.conf
@@ -511,6 +565,8 @@
       - patch
       - rule_4.2.1.5
       - rsyslog
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 4.2.1.6 | PATCH | Ensure remote rsyslog messages are only accepted on designated log hosts."
   block:
@@ -545,6 +601,8 @@
       - rule_4.2.1.6
       - rsyslog
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.2.1 | PATCH | Ensure journald is configured to send logs to rsyslog"
   lineinfile:
       dest: /etc/systemd/journald.conf
@@ -558,6 +616,8 @@
       - level1
       - patch
       - rule_4.2.2.1
+
+- include: "{{live_checks_file}}"
 
 - name: "SCORED | 4.2.2.2 | PATCH | Ensure journald is configured to compress large log files"
   lineinfile:
@@ -573,6 +633,8 @@
       - patch
       - rule_4.2.2.2
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.2.3 | PATCH | Ensure journald is configured to write logfiles to persistent disk"
   lineinfile:
       dest: /etc/systemd/journald.conf
@@ -587,6 +649,8 @@
       - patch
       - rule_4.2.2.3
 
+- include: "{{live_checks_file}}"
+
 - name: "SCORED | 4.2.3 | PATCH | Ensure permissions on all logfiles are configured"
   command: find /var/log -type f -exec chmod g-wx,o-rwx {} + -o -type d -exec chmod g-w,o-rwx "{}" +
   changed_when: no
@@ -597,6 +661,8 @@
       - level1
       - patch
       - rule_4.2.3
+
+- include: "{{live_checks_file}}"
 
 - name: "NOTSCORED | 4.3 | PATCH | Ensure logrotate is configured"
   block:
