@@ -18,3 +18,7 @@
   shell: cat /home/admin/index.html | grep 'Index of /centos'
   register: op
   failed_when: op.stdout != ""
+
+- debug:
+    msg: "{{op.stdout}}\n\n{{op.stdout_lines}}"
+  failed_when: op.stdout|length = 0
