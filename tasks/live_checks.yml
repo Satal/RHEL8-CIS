@@ -4,12 +4,19 @@
     url: http://192.168.179.167/centos/
     dest: /home/admin/index.html
 
-- name: Check in index
-  lineinfile: 
-    path: /home/admin/index.html
-    regexp: "^<head><title>Index of /centos/</title></head>"
-    line: "<head><title>Index of /centos/</title></head>"
-    state: present
-  check_mode: yes
-  register: presence
-  failed_when: presence.changed
+# - name: Check in index
+#   lineinfile: 
+#     path: /home/admin/index.html
+#     regexp: "^<head><title>Index of /centos/</title></head>"
+#     line: "<head><title>Index of /centos/</title></head>"
+#     state: present
+#   check_mode: yes
+#   register: presence
+#   failed_when: presence.changed
+
+- name: Read html file
+  shell: cat /home/admin/index.html
+  register: html
+
+- debug: msg="Valid html"
+  when: "'Index of /centos/' in '{{html.stdout}}'"
