@@ -316,9 +316,9 @@
       service: 
         name: cups
         enabled: no
-      when: "'cups' in services"
 
   when:
+      - "'cups' in services"
       - not rhel8cis_cups_server
       - cups_service_status.stdout == "loaded"
       - rhel8cis_rule_2_2_16
