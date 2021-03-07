@@ -5,7 +5,7 @@
     - name: wget from host and check response
       get_url:
         url: http://192.168.179.167/centos
-        tmp_dest: /tmp/index.html
+        dest: /tmp/index.html
 
     - name: Get output for test
       shell: cat /tmp/index.html | grep 'Index of /centos'
