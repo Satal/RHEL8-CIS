@@ -1,13 +1,18 @@
 ---
-- name: wget from host and check response
-  get_url:
-    url: http://192.168.179.167/centos
-    dest: /home/admin/index.html
+- name: Perform live checks
+  block:
 
-- name: Get output for test
-  shell: cat /home/admin/index.html | grep 'Index of /centos'
-  register: op
+    - name: wget from host and check response
+      get_url:
+        url: http://192.168.179.167/centos
+        dest: /home/admin/index.html
 
-- debug:
-    msg: "Test that server is still running"
-  failed_when: op.stdout_lines | length == 0
+    - name: Get output for test
+      shell: cat /home/admin/index.html | grep 'Index of /centos'
+      register: op
+
+    - debug:
+        msg: "Test that server is still running"
+      failed_when: op.stdout_lines | length == 0
+
+  delegate_to: "{{live_checks_host}}"
