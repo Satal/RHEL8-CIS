@@ -1,5 +1,6 @@
 ---
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.1.1 | PATCH | Ensure auditd is installed"
   block:
@@ -33,6 +34,7 @@
       - rule_4.1.1.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.1.2 | PATCH | Ensure auditd service is enabled"
   service:
@@ -50,6 +52,7 @@
       - rule_4.1.1.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.1.3 | PATCH | Ensure auditing for processes that start prior to auditd is enabled"
   replace:
@@ -68,6 +71,7 @@
       - rule_4.1.1.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.1.4 | PATCH | Ensure audit_backlog_limit is sufficient"
   replace:
@@ -85,6 +89,7 @@
       - rule_4.1.1.4
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.2.1 | PATCH | Ensure audit log storage size is configured"
   lineinfile:
@@ -102,6 +107,7 @@
       - rule_4.1.2.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.2.2 | PATCH | Ensure audit logs are not automatically deleted"
   lineinfile:
@@ -119,6 +125,7 @@
       - rule_4.1.2.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.2.3 | PATCH | Ensure system is disabled when audit logs are full"
   lineinfile:
@@ -136,6 +143,7 @@
       - rule_4.1.2.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.3 | PATCH | Ensure changes to system administration scope (sudoers) is collected"
   template:
@@ -154,6 +162,7 @@
       - rule_4.1.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.4 | PATCH | Ensure login and logout events are collected"
   template:
@@ -172,6 +181,7 @@
       - rule_4.1.4
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.5 | PATCH | Ensure session initiation information is collected"
   template:
@@ -190,6 +200,7 @@
       - rule_4.1.5
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.6 | PATCH | Ensure events that modify date and time information are collected"
   template:
@@ -208,6 +219,7 @@
       - rule_4.1.6
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.7 | PATCH | Ensure events that modify the system's Mandatory Access Controls are collected"
   template:
@@ -226,6 +238,7 @@
       - rule_4.1.7
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.8 | PATCH | Ensure events that modify the system's network environment are collected"
   template:
@@ -244,6 +257,7 @@
       - rule_4.1.8
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.9 | PATCH | Ensure discretionary access control permission modification events are collected"
   template:
@@ -262,6 +276,7 @@
       - rule_4.1.9
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.10 | PATCH | Ensure unsuccessful unauthorized file access attempts are collected"
   template:
@@ -280,6 +295,7 @@
       - rule_4.1.10
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.11 | PATCH | Ensure events that modify user/group information are collected"
   template:
@@ -298,6 +314,7 @@
       - rule_4.1.11
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.12 | PATCH | Ensure successful file system mounts are collected"
   block:
@@ -324,6 +341,7 @@
       - rule_4.1.12
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.13 | PATCH | Ensure use of privileged commands is collected"
   template:
@@ -342,6 +360,7 @@
       - rule_4.1.13
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.14 | PATCH | Ensure file deletion events by users are collected"
   template:
@@ -360,6 +379,7 @@
       - rule_4.1.14
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.15 | PATCH | Ensure kernel module loading and unloading is collected"
   template:
@@ -378,6 +398,7 @@
       - rule_4.1.15
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.16 | PATCH | Ensure system administrator actions (sudolog) are collected"
   template:
@@ -396,6 +417,7 @@
       - rule_4.1.16
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.1.17 | PATCH | Ensure the audit configuration is immutable"
   template:
@@ -414,6 +436,7 @@
       - rule_4.1.17
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.1.1 | PATCH | Ensure rsyslog or syslog-ng is installed"
   dnf:
@@ -427,6 +450,7 @@
       - rule_4.2.1.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.1.2 | PATCH | Ensure rsyslog Service is enabled"
   service:
@@ -442,6 +466,7 @@
       - rule_4.2.1.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.1.3 | PATCH | Ensure rsyslog default file permissions configured"
   lineinfile:
@@ -457,6 +482,7 @@
       - rule_4.2.1.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "NOTSCORED | 4.2.1.4 | PATCH | Ensure logging is configured"
   block:
@@ -543,6 +569,7 @@
       - rule_4.2.1.4
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.1.5 | PATCH | Ensure rsyslog is configured to send logs to a remote log host"
   blockinfile:
@@ -567,6 +594,7 @@
       - rsyslog
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "NOTSCORED | 4.2.1.6 | PATCH | Ensure remote rsyslog messages are only accepted on designated log hosts."
   block:
@@ -602,6 +630,7 @@
       - rsyslog
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.2.1 | PATCH | Ensure journald is configured to send logs to rsyslog"
   lineinfile:
@@ -618,6 +647,7 @@
       - rule_4.2.2.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.2.2 | PATCH | Ensure journald is configured to compress large log files"
   lineinfile:
@@ -634,6 +664,7 @@
       - rule_4.2.2.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.2.3 | PATCH | Ensure journald is configured to write logfiles to persistent disk"
   lineinfile:
@@ -650,6 +681,7 @@
       - rule_4.2.2.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 4.2.3 | PATCH | Ensure permissions on all logfiles are configured"
   command: find /var/log -type f -exec chmod g-wx,o-rwx {} + -o -type d -exec chmod g-w,o-rwx "{}" +
@@ -663,6 +695,7 @@
       - rule_4.2.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "NOTSCORED | 4.3 | PATCH | Ensure logrotate is configured"
   block:

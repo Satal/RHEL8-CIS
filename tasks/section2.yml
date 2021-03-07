@@ -12,6 +12,7 @@
       - rule_2.1.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "NOTSCORED | 2.2.1.1 | PATCH | Ensure time synchronization is in use - service install"
   dnf:
@@ -26,6 +27,7 @@
       - rule_2.2.1.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.1.2 | PATCH | Ensure chrony is configured"
   block:
@@ -54,6 +56,7 @@
       - rule_2.2.1.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.2 | PATCH | Ensure X Window System is not installed"
   shell: dnf -y remove xorg-x11*
@@ -68,11 +71,13 @@
       - rule_2.2.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: Populate service facts
   service_facts:
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.3 | PATCH | Ensure rsync service is not enabled "
   service:
@@ -89,6 +94,7 @@
       - rule_2.2.3
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.4 | PATCH | Ensure Avahi Server is not enabled"
   service:
@@ -108,6 +114,7 @@
       - rule_2.2.4
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.5 | PATCH | Ensure SNMP Server is not enabled"
   service:
@@ -124,6 +131,7 @@
       - rule_2.2.5
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.6 | PATCH | Ensure HTTP Proxy Server is not enabled"
   service:
@@ -140,6 +148,7 @@
       - rule_2.2.6
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.7 | PATCH | Ensure Samba is not enabled"
   service:
@@ -156,6 +165,7 @@
       - rule_2.2.7
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.8 | PATCH | Ensure IMAP and POP3 server is not enabled"
   service:
@@ -172,6 +182,7 @@
       - rule_2.2.8
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 # Perhaps we should look to break this out into each of the items separately
 # this would allow for any one of the servers while still disabling all others
@@ -196,6 +207,7 @@
       - rule_2.2.9
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.10 | PATCH | Ensure FTP Server is not enabled"
   service:
@@ -212,6 +224,7 @@
       - rule_2.2.10
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.11 | PATCH | Ensure DNS Server is not enabled"
   service:
@@ -228,6 +241,7 @@
       - rule_2.2.11
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.12 | PATCH | Ensure NFS is not enabled"
   service:
@@ -247,6 +261,7 @@
       - rule_2.2.12
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.13 | PATCH | Ensure RPC is not enabled"
   service:
@@ -266,6 +281,7 @@
       - rule_2.2.7
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.14 | PATCH | Ensure LDAP server is not enabled"
   service:
@@ -285,6 +301,7 @@
       - rule_2.2.6
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.15 | PATCH | Ensure DHCP Server is not enabled"
   service:
@@ -304,6 +321,7 @@
       - rule_2.2.15
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.16 | PATCH | Ensure CUPS is not enabled"
   block:
@@ -332,6 +350,7 @@
       - rule_2.2.16
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.17 | PATCH | Ensure NIS Server is not enabled"
   service:
@@ -348,6 +367,7 @@
       - rule_2.2.17
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.2.18 | PATCH | Ensure mail transfer agent is configured for local-only mode"
   lineinfile:
@@ -365,6 +385,7 @@
       - rule_2.2.18
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.3.1 | PATCH | Ensure NIS Client is not installed"
   dnf:
@@ -379,6 +400,7 @@
       - rule_2.3.1
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.3.2 | PATCH | Ensure telnet client is not installed"
   dnf:
@@ -393,6 +415,7 @@
       - rule_2.3.2
 
 - include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
 
 - name: "SCORED | 2.3.3 | PATCH | Ensure LDAP client is not installed"
   dnf:
@@ -405,3 +428,6 @@
       - level1
       - patch
       - rule_2.3.3
+
+- include: "{{live_checks_file}}"
+  when: perform_live_checks|default(false)|bool
