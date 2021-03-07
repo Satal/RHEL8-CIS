@@ -5,10 +5,10 @@
     - name: wget from host and check response
       get_url:
         url: http://192.168.179.167/centos
-        dest: /home/admin/index.html
+        tmp_dest: /tmp/index.html
 
     - name: Get output for test
-      shell: cat /home/admin/index.html | grep 'Index of /centos'
+      shell: cat /tmp/index.html | grep 'Index of /centos'
       register: op
 
     - debug:
