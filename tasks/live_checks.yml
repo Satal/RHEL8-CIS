@@ -6,13 +6,16 @@
       get_url:
         url: http://192.168.179.167/centos
         dest: /tmp/index.html
+      delegate_to: "{{live_checks_host}}"
 
     - name: Get output for test
       shell: cat /tmp/index.html | grep 'Index of /centos'
       register: op
+      delegate_to: "{{live_checks_host}}"
 
     - debug:
         msg: "Test that server is still running"
       failed_when: op.stdout_lines | length == 0
+      delegate_to: "{{live_checks_host}}"
 
   delegate_to: "{{live_checks_host}}"
