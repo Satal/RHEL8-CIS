@@ -11,5 +11,5 @@
         rhel8cis_skip_for_travis: false
         
         perform_live_checks: true
-        live_checks_file: tasks/live_checks.yml
+        live_checks_file: tasks/live_checks/repo_live_checks.yml
         live_checks_host: 127.0.0.1
